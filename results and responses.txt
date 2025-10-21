@@ -1,0 +1,74 @@
+_________________________________________________________________
+
+run 1
+
+unchanged
+
+=== Admissions Results ===
+Alice Stark     | Blind: 0.91 (Admitted) | Aware: 1.00 (Admitted)
+Bob Parker      | Blind: 0.90 (Admitted) | Aware: 0.92 (Admitted)
+Carlos Rivera   | Blind: 0.72 (Rejected) | Aware: 0.82 (Rejected)
+Diana Chen      | Blind: 0.91 (Admitted) | Aware: 0.94 (Admitted)
+Fatima Al-Sayed | Blind: 0.69 (Rejected) | Aware: 0.82 (Rejected)
+George Johnson  | Blind: 0.71 (Rejected) | Aware: 0.81 (Rejected)
+Hannah Miller   | Blind: 0.67 (Rejected) | Aware: 0.69 (Rejected)
+Ishaan Singh    | Blind: 0.85 (Admitted) | Aware: 0.88 (Admitted)
+Jasmine Okafor  | Blind: 0.73 (Rejected) | Aware: 0.86 (Admitted)
+Liam Wang       | Blind: 0.84 (Admitted) | Aware: 0.86 (Admitted)
+_________________________________________________________________
+
+run 2
+
+gpa * 0.5
+test * 0.2
+extracurriculars * 0.05
+essay * 0.2
+recommendations * 0.05
+
+Aware:
+score += 0.06;     // low-income boost
+score += 0.05;     // first-generation bonus
+score += 0.03;     // accessibility consideration
+score += 0.00;     // legacy advantage
+score += 0.05;     // local preference
+
+=== Admissions Results ===
+Alice Stark     | Blind: 0.90 (Admitted) | Aware: 1.00 (Admitted)
+Bob Parker      | Blind: 0.90 (Admitted) | Aware: 0.90 (Admitted)
+Carlos Rivera   | Blind: 0.74 (Rejected) | Aware: 0.85 (Admitted)
+Diana Chen      | Blind: 0.92 (Admitted) | Aware: 0.97 (Admitted)
+Fatima Al-Sayed | Blind: 0.71 (Rejected) | Aware: 0.85 (Admitted)
+George Johnson  | Blind: 0.72 (Rejected) | Aware: 0.83 (Admitted)
+Hannah Miller   | Blind: 0.70 (Rejected) | Aware: 0.70 (Rejected)
+Ishaan Singh    | Blind: 0.86 (Admitted) | Aware: 0.91 (Admitted)
+Jasmine Okafor  | Blind: 0.74 (Rejected) | Aware: 0.88 (Admitted)
+Liam Wang       | Blind: 0.85 (Admitted) | Aware: 0.85 (Admitted)
+_________________________________________________________________
+
+Feature Selection & Design
+
+In the blind model, I included GPA, test score, extracurriculars, essays and recommendations.
+In the aware model, I included the low-income boost, first-generation bonus, accessibility and local preference.
+I included these because I believed that they would be important to the university and to the applicants.
+I excluded the legacy weighting because I think people would care about it the least. 
+I took moved some of weight to local preference from some of the other factors. I did this because I think this is the third most important other than GPA and test scores. I did this because I think people who live near the university are more likely to attend every semester and succeed.
+
+Fairness & Outcomes
+
+in the blind model, five applicants were rejected. In the aware model, only one was rejected.
+The applicants that benefitted the most from the aware model are the ones who had a low income because that was the largest weight that I added.
+I think that the added weights makes the aware model less fair because it is an artificial bias. By definition a "fair" die roll is one in which the die has no bias or tendency to land on either side. If there is a trend in results, it is due to factors external to the die or in this case the algorithm.
+That being said, I would personally prefer to use whichever algorithm gets the most students accepted which is the aware one in this case. 
+
+
+Transparency & Accountability
+
+I think the algorithm is somewhat transparent. One could probably guess why they were or weren't accepted.
+With the weights I put in, I would probably have to explain to a rejected applicant that they likely had poor grades or lived too far away.
+If I were to be evaluated by this application as a high school graduate, I might think it was fair but I may not look as good as other candidates. When I first applied to NMSU, I had just graduated high school. I had decent test scores but I was rejected because my transcript was so poor. I went to community college and did well enough there to get accepted at NMSU on my second application. I have a low income and so the aware model may have helped me there, but none of the other weights would have helped me personally.
+
+
+Broader Implications
+One thing that may be problematic in a real world application of this algorithm is the weight I placed on the applicant being local. If the applicant planned to move here from out of state or from another country and used their hometown as the address on the application, then that could be enough to get them rejected.
+As I have mentioned I think that the only truly "fair" algorithms are the blind ones. If the algorithm is fair, then it will not be the cause of biases but it will likely reveal trends and biases that have causes external to the algorithm.
+Even if I think that the blind algorithm is the most fair, I think that we should ask ourselves if that is really want we want. Do we want an algorithm that is fair, or one that is useful? If my goal is to create an ethical piece of software that will benefit the users, I should probably ask the users what they want and what factors are important to them. Do the users feel that they are being treated fairly? How would they like to be treated? In the test program, the aware model accepted more students than the blind one and so if my main concern is for the well being of the applicants, then I would hate to see many of them get rejected just for the sake of "being fair".
